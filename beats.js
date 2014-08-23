@@ -4,24 +4,26 @@ function Beats() {
   var self = this;
   var bpm = 120;
   // how many beats a single unit represents
+  // start out with eighth-notes
   var interval = 1;
   var AudioContext = window.AudioContext || window.webkitAudioContext;
-  var ctx = new AudioContext();
+  this.ctx = new AudioContext();
 
 
-  loadInstrumentBuffers(ctx, function(err, buffers) {
+  this.readyFuncs = [];
+  loadInstrumentBuffers(this.ctx, function(err, buffers) {
     if (err) {
       return console.error('err', err);
     }
-    self.scheduler = new Scheduler(bpm, interval, ctx, buffers);
+    self.scheduler = new Scheduler(bpm, interval, self.ctx, buffers);
     self._setReady();
   });
 }
 
 Beats.prototype._setReady = function() {
-  console.log('worky?');
   this.isReady = true;
-  this.readyFunc();
+  this.readyFuncs.forEach(function(ready) { ready() });
+  this.readyFuncs = [];
 }
 
 Beats.prototype.onReady = function(cb) {
@@ -29,7 +31,7 @@ Beats.prototype.onReady = function(cb) {
     return process.nextTick(cb);
   }
 
-  this.readyFunc = cb;
+  this.readyFuncs.push(cb);
 }
 
 function loadInstrumentBuffers(ctx, cb) {
@@ -114,8 +116,14 @@ function parseInstrument(instrumentStr) {
   });
 }
 
+function removeEmpty(line) {
+  return !!line;
+}
+
 function buildTrack(notation) {
-  var instruments = notation.split('\n').map(parseInstrument);
+  var instrumentStrings = notation.split('\n').filter(removeEmpty)
+  console.log('instrument strings is ', instrumentStrings);
+  var instruments = instrumentStrings.map(parseInstrument);
 
   return instruments[0].map(function(note, i) {
     var notesOnBeat = []
@@ -138,8 +146,15 @@ Beats.prototype.notation = function(notation) {
   return track;
 }
 
-Beats.prototype.startPlaying = function() {
-  this.scheduler.startPlaying(this.track);
+Beats.prototype.startPlaying = function(track) {
+  var self = this;
+
+  if (!track) {
+    track = this.track;
+  }
+  this.onReady(function() {
+    self.scheduler.startPlaying(track);
+  });
 }
 
 

@@ -13,4 +13,22 @@ var track = new Beats({bpm: 120});
 
 ```
 
-create the 
+# TODO
+
+0. make sure there is only one beats track playing at the same time
+0. expose hooks to when beats will change
+0. triplets, swung notes, etc
+0. Fix sound loading in firefox
+
+
+bd| bd bd -- -- bd bd -- -- bd bd -- -- bd bd -- --
+sn| -- -- sn -- -- -- sn -- -- -- sn -- -- -- sn --
+hh| hh hh hh hh hh hh hh hh hh hh hh hh hh hh hh hh
+
+
+bd| bd -- -- -- bd bd -- -- bd -- -- -- bd bd -- --
+sn| -- -- sn -- -- -- sn -- -- -- sn -- -- -- sn --
+hh| -- hh hh -- -- hh hh -- -- hh hh -- -- hh hh --
+
+
+more todo: add descending lazer beams with setCurve on the parameters
