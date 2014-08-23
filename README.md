@@ -31,4 +31,16 @@ sn| -- -- sn -- -- -- sn -- -- -- sn -- -- -- sn --
 hh| -- hh hh -- -- hh hh -- -- hh hh -- -- hh hh --
 
 
+# TODO: parse this
+bd| bd -- -- -- -- -- -- -- | bd -- bd -- -- -- -- -- | bd -- -- -- -- -- -- -- | bd -- bd -- -- -- -- -- |
+sn| -- -- -- -- sn -- -- -- | -- -- -- -- sn -- -- -- | -- -- -- -- sn -- -- -- | -- -- -- -- sn -- -- -- |
+hh| -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- |
+
+
+bd| bd -- -- -- -- -- -- -- bd -- bd -- -- -- -- -- bd -- -- -- -- -- -- -- bd -- bd -- -- -- -- --
+sn| -- -- -- -- sn -- -- -- -- -- -- -- sn -- -- -- -- -- -- -- sn -- -- -- -- -- -- -- sn -- -- --
+hh| -- -- hh hh -- -- -- -- -- -- hh hh -- -- -- -- -- -- hh hh -- -- -- -- -- -- hh hh -- -- -- --
+
+
+
 more todo: add descending lazer beams with setCurve on the parameters

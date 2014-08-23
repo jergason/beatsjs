@@ -1,11 +1,12 @@
-var Scheduler = require('./scheduler');
+var Scheduler = require('./lib/scheduler');
+var buildTrack = require('./lib/buildTrack');
 
 function Beats() {
   var self = this;
   var bpm = 120;
   // how many beats a single unit represents
-  // start out with eighth-notes
-  var interval = 1;
+  // start out with eigth-notes
+  var interval = 1/2;
   var AudioContext = window.AudioContext || window.webkitAudioContext;
   this.ctx = new AudioContext();
 
@@ -95,46 +96,6 @@ function asyncObject(obj, cb) {
   keys.forEach(function(key) {
     obj[key](makeDone(key));
   });
-}
-
-/**
- * @private
- *
- * Parse out the instrument and a series of schedules
- **/
-function parseInstrument(instrumentStr) {
-  var chunks = instrumentStr.split('|');
-  var instrument = chunks[0];
-  var notes = chunks[1].trim().split(' ');
-  console.log('notes is', notes);
-  return notes.map(function(note) {
-    // return undefined if it is a rest
-    if (note == '--') {
-      return;
-    }
-    return {note: note, instrument: instrument};
-  });
-}
-
-function removeEmpty(line) {
-  return !!line;
-}
-
-function buildTrack(notation) {
-  var instrumentStrings = notation.split('\n').filter(removeEmpty)
-  console.log('instrument strings is ', instrumentStrings);
-  var instruments = instrumentStrings.map(parseInstrument);
-
-  return instruments[0].map(function(note, i) {
-    var notesOnBeat = []
-    instruments.forEach(function(instrument) {
-      if (instrument[i]) {
-        notesOnBeat.push(instrument[i]);
-      }
-    });
-    return notesOnBeat;
-  });
-
 }
 
 /**
