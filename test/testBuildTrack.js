@@ -13,4 +13,11 @@ describe('buildTrack', function() {
     var builtTrack = buildTrack(track);
     assert.equal(builtTrack.length, 32);
   });
+
+  it('parses tracks with multiple instruments', function() {
+    var track = 'bd| bd --\n' +
+                'sm| sm --'
+    var builtTrack = buildTrack(track);
+    assert.equal(builtTrack[0].length, 2);
+  });
 });

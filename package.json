@@ -18,6 +18,7 @@
   "author": "Jamison Dance <jergason@gmail.com> (http://jamisondance.com)",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^1.21.4"
+    "mocha": "^1.21.4",
+    "sinon": "^1.10.3"
   }
 }

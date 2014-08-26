@@ -17,6 +17,8 @@ var track = new Beats({bpm: 120});
 
 0. make sure there is only one beats track playing at the same time
 0. expose hooks to when beats will change
+0. enable progressively building up a track, i.e. playing a new track just
+   adds to the old one, not replaces it
 0. triplets, swung notes, etc
 0. Fix sound loading in firefox
 
