@@ -2,12 +2,13 @@
   "name": "beatsjs",
   "version": "1.0.0",
   "description": "Create beats from ascii drum machine tracks with the web audio api.",
-  "main": "beats.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/*"
+    "test": "mocha test/*",
+    "build": "browserify example/app.js -o example/build.js"
   },
   "keywords": [
     "browser",
@@ -18,7 +19,9 @@
   "author": "Jamison Dance <jergason@gmail.com> (http://jamisondance.com)",
   "license": "MIT",
   "devDependencies": {
+    "browserify": "^5.11.1",
     "mocha": "^1.21.4",
     "sinon": "^1.10.3"
-  }
+  },
+  "dependencies": {}
 }
