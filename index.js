@@ -13,7 +13,7 @@ function nop() {}
  *   beatEmitter: callback called every time a track is scheduled with the
  *     times in seconds that each note will be played
  */
-function Scheduler(ctx, instrumentBuffers, opts) {
+function Beats(ctx, instrumentBuffers, opts) {
   this.ctx = ctx;
   this.instrumentBuffers = instrumentBuffers;
 
@@ -28,11 +28,11 @@ function Scheduler(ctx, instrumentBuffers, opts) {
   var dummyNode = ctx.createOscillator();
 }
 
-Scheduler.prototype.secondsPerBeat = function() {
+Beats.prototype.secondsPerBeat = function() {
   return 60 / this.bpm;
 }
 
-Scheduler.prototype.secondsPerNote = function() {
+Beats.prototype.secondsPerNote = function() {
   // 1/8 note is actually 1/2 of a beat, so multiply by 4 to go from musical
   // notiation to fractions of a beat
   return this.secondsPerBeat() * this.interval * 4;
@@ -60,7 +60,7 @@ function playTrackAtTime(track, startTime, context, noteInterval, instrumentBuff
   return {lastNoteTime: timeForI, beatTimes: beatTimes};
 }
 
-Scheduler.prototype.startPlaying = function(track, startTime) {
+Beats.prototype.startPlaying = function(track, startTime) {
   // if we are already playing, just change which track will play next and
   // bail out
   if (this.isPlaying) {
@@ -81,11 +81,11 @@ Scheduler.prototype.startPlaying = function(track, startTime) {
   this._loopingPlay(startTime);
 };
 
-Scheduler.prototype.stop = function() {
+Beats.prototype.stop = function() {
   this.isPlaying = false;
 }
 
-Scheduler.prototype._shouldStop = function() {
+Beats.prototype._shouldStop = function() {
   return !this.isPlaying
 }
 
@@ -94,7 +94,7 @@ Scheduler.prototype._shouldStop = function() {
  *
  * schedule this.currentTrack to be played in a loop.
  */
-Scheduler.prototype._loopingPlay = function(startTime) {
+Beats.prototype._loopingPlay = function(startTime) {
   if (this._shouldStop()) {
     return;
   }
@@ -112,12 +112,12 @@ Scheduler.prototype._loopingPlay = function(startTime) {
 }
 
 /**
- * Parse the ascii drum beat into a schedule of notes to play
+ * Parse the ascii drum beat into a schedule of notes to play.
  **/
-Scheduler.prototype.notation = function(notation) {
+Beats.prototype.notation = function(notation) {
   var track = buildTrack(notation);
   this.currentTrack = track;
   return track;
 }
 
-module.exports = Scheduler;
+module.exports = Beats;
