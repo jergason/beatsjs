@@ -1,6 +1,6 @@
 {
   "name": "beatsjs",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Create beats from ascii drum machine tracks with the web audio api.",
   "main": "index.js",
   "directories": {
